@@ -1,23 +1,10 @@
 #include <iostream>
 #include <list>
 #include <cstring>
+#include "hashtable.hpp"
 using namespace std;
 
 
-// TODO: understand hashtable hash function. Implement new more complex hash function
-
-class HashTable{
-    private:
-        static const int hashGroups = 10;
-        list<pair<int,string>> table[hashGroups];
-    public:
-        bool isEmpty() const;
-        int hashFunction(int key);
-        void insertItem(int key, string value);
-        void removeItem(int key);
-        string searchTable(int key);
-        void printTable();
-};
 
 bool HashTable::isEmpty() const{
     int sum{};
@@ -73,6 +60,13 @@ void HashTable::removeItem(int key){
     return;
 }
 
+string HashTable::searchTable(int key) {
+    int hashValue = hashFunction(key);
+    auto& cell = table[hashValue];
+    auto begIter = begin(cell);
+    return begIter->second;
+}
+
 void HashTable::printTable(){
     for(int i{}; i < hashGroups;i++)
     {
@@ -86,21 +80,6 @@ void HashTable::printTable(){
     }
     return;
 }
-
-int main(){
-    HashTable h;
-    if (h.isEmpty()){
-        cout<<"Empty table"<<endl;
-    }else{
-        cout<<"issue"<<endl;
-    }
-    h.insertItem(105, "Suraj1");
-    h.insertItem(233, "Suraj2");
-    h.insertItem(505, "Suraj3");
-
-    h.printTable();
-    h.removeItem(233);
-    h.printTable();
-    return 0;   
+int HashTable::getHashGroups() {
+    return hashGroups;
 }
-
