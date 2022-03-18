@@ -52,7 +52,7 @@ bool checkSearch(){ // checks to see if hashtable search functionality is workin
     h.insertItem(505, "person1");
     h.insertItem(102, "person2");
     ASSERT(h.isEmpty() == false);
-    ASSERT(h.searchTable(102) == "person1");
+    ASSERT(h.searchTable(505) == "person1");
     ASSERT(h.searchTable(102) == "person2");
     return true;
 }
